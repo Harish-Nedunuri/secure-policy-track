@@ -45,7 +45,6 @@ if __name__ == "__main__":
     
     if cursor:
         #  database operations  using cursor
-        # Example: cursor.execute("SELECT version();")
-        
-        # Close the connection when done
+        # Example: cursor.execute("SELECT version();")        
+        # Close the connection
         close_db_connection(connection, cursor)
