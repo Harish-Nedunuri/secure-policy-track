@@ -13,3 +13,5 @@ requests==2.32.3
 pydantic-settings==2.5.2
 python-multipart==0.0.12
 psycopg2==2.9.9
+asyncpg==0.29.0
+pytest-asyncio==0.24.0

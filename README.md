@@ -5,11 +5,10 @@ Secure Policy Track is a API for tracking and managing insurance policies secure
 ## Requirements
 
 - Python 3.10 or higher
-- PostgreSQL database
+- PostgreSQL database: pgAdmin4 or any other database management system
 - FastAPI
 - SQLAlchemy
 - PyJWT
-
 
 ## Local Installation
 
@@ -19,8 +18,8 @@ To install the Secure Policy Track API, follow these steps:
  ```git clone https://github.com/your-username/secure-policy-track.git```
 - Create a virtual environment and activate it.
 - ```python -m venv .venv```
-- ```source venv/bin/activate``` for Linux/WSL or ```.venv\Scripts\activate``` for Windows
-- Install the secure_policy_track package and required dependencies by running the following command: 
+- ```source venv/bin/activate``` for Linux/WSL or ```.venv\scripts\activate``` for Windows
+- Install the secure_policy_track package and required dependencies by running the following command:
  code ```pip install -e .```
 - Create a .env file in the root directory of the project and add the following environment variables:
 

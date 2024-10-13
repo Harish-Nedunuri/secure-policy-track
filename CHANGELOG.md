@@ -10,16 +10,16 @@
 
 ### Fixes
 
-- Refactored the package setup
+- Included asyncio and asyncpg for concurrent db operations
 
-### ToDo 
+### ToDo
 
 - [x] Set Up the Project Structure & Requirements
 - [x] Tests and Functions Oauth using mock credentials
 - [x] Logging & Database Setup, Tests, Utilities
 - [x] Terraform IaC for resource grp and container registry
 - [x] Add mock data to db and setup PgAdmin4 local tool & add SupportUtils
-- [ ] Create arguments utils and add agrument model RetreiveTask in policy_core package
+- [x] Create arguments utils and add agrument model RetreiveTask in policy_core package
 - [ ] create entry and router for RetreiveTask with Oauth2 Dependency injection
 - [ ] create a Dockerfile, CI-CD pipeline with triggers, Unit Test, Build and Deploy the container to a remote registry.
 - [ ] Add documentationand doc strings to all functions

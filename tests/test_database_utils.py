@@ -1,104 +1,83 @@
 import pytest
 from unittest import mock
-from policy_core.SupportUtils.database_utils.pgsql_crud import connect_to_db, close_db_connection
+import asyncpg
+import asyncio
+from policy_core.SupportUtils.database_utils.pgsql_connection import connect_to_db, close_db_connection
 
-# Mock for psycopg2 connection
+# Mock for asyncpg connection
 @pytest.fixture
-def mock_psycopg2_connect():
-    # Mocking psycopg2.connect in the context of where it's used
-    with mock.patch("policy_core.SupportUtils.database_utils.pgsql_crud.psycopg2.connect") as mock_connect:
+def mock_asyncpg_connect():
+    # Correct the path to patch asyncpg.connect where it's used in your code
+    with mock.patch("policy_core.SupportUtils.database_utils.pgsql_connection.asyncpg.connect") as mock_connect:
         yield mock_connect
 
-# Given-When-Then: Test for successful connection
-def test_connect_to_db_success(mock_psycopg2_connect):
+# Given-When-Then: Test for successful connection (async version)
+@pytest.mark.asyncio
+async def test_connect_to_db_success(mock_asyncpg_connect):
     """
     GIVEN valid database configuration
     WHEN connect_to_db is called
-    THEN it should return a connection and cursor
+    THEN it should return a connection
     """
     # Given
-    mock_connection = mock.Mock()
-    mock_cursor = mock.Mock()
-    mock_psycopg2_connect.return_value = mock_connection
-    mock_connection.cursor.return_value = mock_cursor
+    mock_connection = mock.AsyncMock()
+    mock_asyncpg_connect.return_value = mock_connection
 
     # When
-    connection, cursor = connect_to_db()
+    connection = await connect_to_db()
 
     # Then
     assert connection == mock_connection
-    assert cursor == mock_cursor
-    mock_psycopg2_connect.assert_called_once()  # Ensure connect was called once
-    mock_connection.cursor.assert_called_once()  # Ensure cursor was called once
+    mock_asyncpg_connect.assert_called_once()  # Ensure connect was called once
 
-# Given-When-Then: Test for failed connection
-def test_connect_to_db_failure(mock_psycopg2_connect):
+# Given-When-Then: Test for failed connection (async version)
+@pytest.mark.asyncio
+async def test_connect_to_db_failure(mock_asyncpg_connect):
     """
     GIVEN invalid database configuration or error in connection
     WHEN connect_to_db is called
-    THEN it should return None for both connection and cursor
+    THEN it should return None for connection
     """
     # Given
-    mock_psycopg2_connect.side_effect = Exception("Connection failed")
+    mock_asyncpg_connect.side_effect = Exception("Connection failed")
 
     # When
-    connection, cursor = connect_to_db()
+    connection = await connect_to_db()
 
     # Then
     assert connection is None
-    assert cursor is None
-    mock_psycopg2_connect.assert_called_once()  # Ensure connect was called once
+    mock_asyncpg_connect.assert_called_once()  # Ensure connect was called once
 
-# Given-When-Then: Test for closing the connection successfully
-def test_close_db_connection_success():
+# Given-When-Then: Test for closing the connection successfully (async version)
+@pytest.mark.asyncio
+async def test_close_db_connection_success():
     """
-    GIVEN an open connection and cursor
+    GIVEN an open connection
     WHEN close_db_connection is called
-    THEN it should close both the connection and cursor
+    THEN it should close the connection
     """
     # Given
-    mock_connection = mock.Mock()
-    mock_cursor = mock.Mock()
+    mock_connection = mock.AsyncMock()
 
     # When
-    close_db_connection(mock_connection, mock_cursor)
-
-    # Then
-    mock_cursor.close.assert_called_once()
-    mock_connection.close.assert_called_once()
-
-# Given-When-Then: Test for closing without a cursor
-def test_close_db_connection_no_cursor():
-    """
-    GIVEN an open connection but no cursor
-    WHEN close_db_connection is called
-    THEN it should only close the connection and not raise an error for the cursor
-    """
-    # Given
-    mock_connection = mock.Mock()
-    mock_cursor = None
-
-    # When
-    close_db_connection(mock_connection, mock_cursor)
+    await close_db_connection(mock_connection)
 
     # Then
     mock_connection.close.assert_called_once()
-    # Ensure cursor.close() is not called
 
-# Given-When-Then: Test for closing without a connection
-def test_close_db_connection_no_connection():
+# Given-When-Then: Test for closing without a connection (async version)
+@pytest.mark.asyncio
+async def test_close_db_connection_no_connection():
     """
-    GIVEN an open cursor but no connection
+    GIVEN no connection
     WHEN close_db_connection is called
-    THEN it should only close the cursor and not raise an error for the connection
+    THEN it should handle the absence of the connection without raising an error
     """
     # Given
     mock_connection = None
-    mock_cursor = mock.Mock()
 
     # When
-    close_db_connection(mock_connection, mock_cursor)
+    await close_db_connection(mock_connection)
 
     # Then
-    mock_cursor.close.assert_called_once()
-    # Ensure connection.close() is not called
+    # Ensure connection.close() is not called because the connection is None
