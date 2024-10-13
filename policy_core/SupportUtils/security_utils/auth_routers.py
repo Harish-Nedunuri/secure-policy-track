@@ -1,14 +1,14 @@
-from fastapi import FastAPI, Depends, HTTPException, status, Form
+from fastapi import Depends, HTTPException, status, Form
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 from pydantic import BaseModel
-from datetime import datetime, timedelta
+from datetime import  timedelta
 from typing import Optional
 from fastapi.routing import APIRouter
 from typing import Annotated, Any
 from policy_core.SupportUtils.secret_utils.config import Settings
 from policy_core.SupportUtils.security_utils.oauth2_security import AuthService
+
 class Token(BaseModel):
     access_token: str
     access_token_expires_mins: Any

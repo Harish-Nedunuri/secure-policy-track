@@ -1,3 +1,4 @@
+from policy_core.RetreiveTask.src.models import SearchCriteriaEnum
 def get_query_for_search(search_criteria: str, row_limit: int):
     """
     Generates an SQL query that searches policies based on dynamic search criteria and limits the number of rows returned.
@@ -9,12 +10,11 @@ def get_query_for_search(search_criteria: str, row_limit: int):
     Returns:
     - query (str): The SQL query string with the search criteria, value, and row limit.
     """
-    valid_columns = ['policy_number', 'premium_amount', 'coverage_amount', 'status', 
-                     'start_date', 'end_date', 'full_name', 'address', 'email', 
-                     'phone_number', 'type_name', 'description']
+    # Check if the search_criteria is part of the SearchCriteriaEnum
+    if search_criteria not in SearchCriteriaEnum.__members__:
+        valid_columns = ', '.join([e.value for e in SearchCriteriaEnum])
+        raise ValueError(f"Invalid search criteria. Must be one of: {valid_columns}")
     
-    if search_criteria not in valid_columns:
-        raise ValueError(f"Invalid search criteria. Must be one of: {', '.join(valid_columns)}")
     
     # Construct the SQL query
     query = f"""

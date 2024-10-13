@@ -41,7 +41,7 @@ class RetreiverDataTask:
             result = [dict(zip(columns, row)) for row in rows]
 
             # Return the result as JSON
-            return json.dumps(result, default=str) if result else {}
+            return result if result else {}
         
         except Exception as error:
             logger.error(f"Error while retrieving data: {error}")

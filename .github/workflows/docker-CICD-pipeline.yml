@@ -32,3 +32,37 @@ jobs:
         run: |
           pip install pytest
           pytest -vv
+
+      # Step 5: Set up QEMU
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+  
+      # Step 6: Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      # Step 7: Set Docker image tag
+      - name: Set Docker image tag
+        id: set-image-tag
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/develop" ]; then
+            echo "image_tag=policytrack:dev" >> $GITHUB_ENV
+          elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            echo "image_tag=policytrack:latest" >> $GITHUB_ENV
+          fi
+      
+      # Step 8: Log in to Azure Container Registry
+      - name: Log in to Azure Container Registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.CONTAINER_REGISTRY_SERVER }}
+          username: docugenacr
+          password: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
+
+      # Step 9: Build and push Docker image
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags:  ${{ secrets.CONTAINER_REGISTRY_SERVER }}/${{ env.image_tag }}
