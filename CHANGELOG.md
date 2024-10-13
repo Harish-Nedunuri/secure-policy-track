@@ -20,8 +20,8 @@
 - [x] Terraform IaC for resource grp and container registry
 - [x] Add mock data to db and setup PgAdmin4 local tool & add SupportUtils
 - [x] Create arguments utils and add agrument model RetreiveTask in policy_core package
-- [ ] create entry and router for RetreiveTask with Oauth2 Dependency injection
-- [ ] create a Dockerfile, CI-CD pipeline with triggers, Unit Test, Build and Deploy the container to a remote registry.
+- [x] create entry and router for RetreiveTask with Oauth2 Dependency injection
+- [x] create a Dockerfile, CI-CD pipeline with triggers, Unit Test, Build and Deploy the container to a remote registry.
 - [ ] Add documentationand doc strings to all functions
 - [ ] Perform testing and add documentation
 - [ ] Add user registration, verification and active status and refactor tests

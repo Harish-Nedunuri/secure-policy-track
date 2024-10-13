@@ -26,3 +26,17 @@ To install the Secure Policy Track API, follow these steps:
 ## Project Structure
 
 The project is
+
+## Docker Build
+
+- Install Docker & Docker Compose on your local machine.
+- Navigate to the root directory of the project.
+- Run the following command to build the Docker image:
+
+```docker system prune --force```
+
+```docker build -t policytrack:test .```
+
+``` docker run -p 8000:8000 policytrack:test ```
+
+- Open LocalHost:8000  in your web browser to access the API.

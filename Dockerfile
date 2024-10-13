@@ -4,16 +4,17 @@ FROM python:3.10-slim
 # Create and set the working directory
 WORKDIR /app
 
-# Copy the all file into the working directory
+# Install system dependencies needed for psycopg2 and other packages
+RUN apt-get update \
+    && apt-get install -y build-essential libpq-dev gcc \
+    && apt-get clean
+
+# Copy the application files into the working directory
 COPY . /app/
 
-# Install the dependencies
-RUN apt-get update \
-    && apt-get install -y sqlite3 libsqlite3-dev libreoffice \
-    && pip install --upgrade pip \
-    && pip install -r requirements.txt \
-    && pip install .     
-
+# Install Python dependencies
+RUN pip install --upgrade pip \
+    && pip install .
 
 # Expose the port the app runs on
 EXPOSE 8000
