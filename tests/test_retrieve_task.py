@@ -1,6 +1,6 @@
 
 import pytest
-from policy_core.RetreiveTask.src.retreive_data_from_db import get_query_for_search  
+from policy_core.RetrieveTask.src.retrieve_data_from_db import get_query_for_search  
 
 def normalize_query(query):
     """

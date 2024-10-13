@@ -10,14 +10,14 @@ class SearchCriteriaEnum(str, Enum):
     email = "email"   
     type_name = "type_name"
 
-    # TODO: use below serach_criterias for advanced search.     
+    # TODO: use below columns for advanced search.     
         # premium_amount = "premium_amount"
         # coverage_amount = "coverage_amount" 
         # start_date = "start_date"
         # end_date = "end_date"  
         # phone_number = "phone_number"
 
-class RetriverResponse(BaseModel):
+class RetreiverResponse(BaseModel):
     policy_number: str
     premium_amount: float
     coverage_amount: float

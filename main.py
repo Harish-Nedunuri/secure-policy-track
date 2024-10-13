@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from policy_core.SupportUtils.security_utils.auth_routers import router as \
     oauth2_router, router_success, router_refresh, oauth2Scheme
-from policy_core.RetreiveTask.router import retrive_router
+from policy_core.RetrieveTask.router import retrieve_router
 
 
 with open("package_setup.json", "r") as f:
@@ -37,4 +37,4 @@ app.include_router(router_success)
 # TODO: Add any Middleware that is appropriate
 
 # Retreive Data
-app.include_router(retrive_router)
+app.include_router(retrieve_router)
