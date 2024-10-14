@@ -19,29 +19,56 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.10'  
+          python-version: '3.10'
 
-      # Step 3: Install dependencies
+      # Step 3: Load environment variables from GitHub Secrets
+      - name: Load environment variables
+        env:
+          POSTGRES_ADMIN_USER: ${{ secrets.POSTGRES_ADMIN_USER }}
+          POSTGRES_ADMIN_PASSWORD: ${{ secrets.POSTGRES_ADMIN_PASSWORD }}
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+          POSTGRES_INSDB: ${{ secrets.POSTGRES_INSDB }}
+          DEBUG: ${{ secrets.DEBUG }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        run: |
+          echo "POSTGRES_ADMIN_USER=${POSTGRES_ADMIN_USER}" >> $GITHUB_ENV
+          echo "POSTGRES_ADMIN_PASSWORD=${POSTGRES_ADMIN_PASSWORD}" >> $GITHUB_ENV
+          echo "POSTGRES_HOST=${POSTGRES_HOST}" >> $GITHUB_ENV
+          echo "POSTGRES_PORT=${POSTGRES_PORT}" >> $GITHUB_ENV
+          echo "POSTGRES_INSDB=${POSTGRES_INSDB}" >> $GITHUB_ENV
+          echo "DEBUG=${DEBUG}" >> $GITHUB_ENV
+          echo "SECRET_KEY=${SECRET_KEY}" >> $GITHUB_ENV
+
+      # Step 4: Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install .
 
-      # Step 4: Run unit tests with pytest
+      # Step 5: Run unit tests with pytest
       - name: Run tests
+        env:
+          POSTGRES_ADMIN_USER: ${{ secrets.POSTGRES_ADMIN_USER }}
+          POSTGRES_ADMIN_PASSWORD: ${{ secrets.POSTGRES_ADMIN_PASSWORD }}
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+          POSTGRES_INSDB: ${{ secrets.POSTGRES_INSDB }}
+          DEBUG: ${{ secrets.DEBUG }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: |
-          pip install pytest
+          pip install pytest pytest-asyncio
           pytest -vv
 
-      # Step 5: Set up QEMU
+      # Step 6: Set up QEMU
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-  
-      # Step 6: Set up Docker Buildx
+
+      # Step 7: Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      
-      # Step 7: Set Docker image tag
+
+      # Step 8: Set Docker image tag
       - name: Set Docker image tag
         id: set-image-tag
         run: |
@@ -50,8 +77,8 @@ jobs:
           elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
             echo "image_tag=policytrack:latest" >> $GITHUB_ENV
           fi
-      
-      # Step 8: Log in to Azure Container Registry
+
+      # Step 9: Log in to Azure Container Registry
       - name: Log in to Azure Container Registry
         uses: azure/docker-login@v1
         with:
@@ -59,7 +86,7 @@ jobs:
           username: ${{ secrets.CONTAINER_REGISTRY_ADMIN }}
           password: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
 
-      # Step 9: Build and push Docker image
+      # Step 10: Build and push Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:

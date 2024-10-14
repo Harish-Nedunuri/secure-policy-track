@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.1 (14/10/2024)
+## 1.0.3 (14/10/2024)
 
 ### New Features
 
@@ -13,6 +13,8 @@
 - Included asyncio and asyncpg for concurrent db operations
 - GET sucess response for RetreiveTask status is 200 OK not 201 Created
 - Password reset
+- Restructured the Tests: Unit Tests and DB Integration Tests
+- Added env variables in GITHub Secrets
 
 ### ToDo
 
@@ -26,4 +28,3 @@
 - [x] create a Dockerfile, CI-CD pipeline with triggers, Unit Test, Build and Deploy the container to a remote registry.
 - [x] Add documentation and doc strings to all functions
 - [x] Perform testing and add documentation
-
