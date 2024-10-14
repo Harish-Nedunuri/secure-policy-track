@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 (14/10/2024)
+## 1.0.1 (14/10/2024)
 
 ### New Features
 
@@ -12,6 +12,7 @@
 
 - Included asyncio and asyncpg for concurrent db operations
 - GET sucess response for RetreiveTask status is 200 OK not 201 Created
+- Password reset
 
 ### ToDo
 

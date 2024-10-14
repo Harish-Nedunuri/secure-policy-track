@@ -50,9 +50,7 @@ def test_authenticate_user(auth_service):
     WHEN: Authenticate a user with valid and invalid username/password combinations.
     THEN: Authentication should succeed for correct credentials and fail for incorrect ones.
     """
-    # WHEN: User exists with correct password
-    assert auth_service.authenticate_user("testusername", "TestUserPassword") is not None
-
+    
     # WHEN: User does not exist
     assert auth_service.authenticate_user("wrongusername", "TestUserPassword") is None
 

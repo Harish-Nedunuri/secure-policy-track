@@ -2,6 +2,8 @@
 
 **Secure Policy Track** is an API for tracking and managing insurance policies securely. It provides endpoints for retrieving insurance policies. The API is built using FastAPI and uses a PostgreSQL database for data storage. It is designed to be secure (OAuth2 JWT-based token access) and scalable (leveraging asynchronous features).
 
+The API is built using the ```policy-core==x.x.x``` **pip package**, which is a Python package that provides a set of tools for working with insurance policies.
+
 ## API Sequence Diagram
 
 ![API Sequence Diagram](static/SecurePolicyTract_Sequencediagram.gif)
@@ -16,14 +18,14 @@
 
 ## Usage
 
-### Username and Password are sent via email. Currently user registration and verification is not implemented.
+- **Username and Password** are sent via email. Currently user registration and verification is not implemented
 
-![API Usage](static\SecurePolicyTrackUsage.gif)
- 
+![API Usage](static/SecurePolicyTrackUsage.gif)
+
 ## Requirements
 
 - Python 3.10 or higher
-- PostgreSQL database: pgAdmin4 for local development
+- PostgreSQL database cloud: pgAdmin4 for local development
 
 ## Local Installation
 
@@ -50,7 +52,7 @@ To run the Secure Policy Track API, follow these steps to set up and run the API
         .venv\scripts\activate
         ```
 
-3. Install the required dependencies by running the following command:
+3. Install the ```policy-core==x.x.x``` package and the required dependencies by running the following command:
 
     ```bash
     pip install -e .
@@ -83,6 +85,20 @@ To run the Secure Policy Track API, follow these steps to set up and run the API
     docker build -t <image-name>:tag .
     docker run -p 8000:8000 <image-name>:tag
     ```
+
+7. Terraform commands to create infrastructure:  
+
+    ```cd terraform```
+
+    1. Run ```terraform init``` (if not done already).
+    2. Run ```terraform plan``` to ensure everything is set up correctly.
+    3. Run ```terraform apply``` to apply the changes.
+
+8. Database Setup documentation
+
+-- **Mock data** is generated using [Mockaroo](https://www.mockaroo.com/)
+
+-- **Database schema** is generated using [dbdiagram.io](https://dbdiagram.io/home)
 
 ## Project Structure
 
@@ -162,17 +178,17 @@ This section outlines the core structure of the project:
     └── setup.py                             # Script for setting up the Python package
 ```
 
-
 ## Future Development
 
-1. Add user registration and authentication functionality.
-2. Add Secret Key Management for secrets.
-3. Add audit logging to track the api usage.
-4. Mask PII data in database.
-5. Add unit tests for the API endpoints.
-6. Add support for policy creation and management. Compelte CRUD operations.
-7. Implement a user-friendly web interface for managing policies.
-8. Add Docker Compose for containerization of multiple services.
-9. Improve CI/CD pipeline.
-10. Add support for multiple databases.
-11. Add Multiple Enviroments (Dev, QA, Prod).
+- Add user registration, verification, and activation functionality.
+- Add functionality for Dynamic Data Masking (DDM) of PII data in the database.
+- Add secret key management for secrets.
+- Add audit logging to track API usage.
+- Add role-based access control for policy management and implement API scopes for policy creation and management.
+- Add a `README.md` file for every directory and explain the purpose of each file.
+- Add support for policy creation and management, including complete CRUD operations.
+- Implement a user-friendly web interface for managing policies.
+- Add Docker Compose for containerization of multiple services.
+- Improve the CI/CD pipeline.
+- Add multiple environments (Dev, QA, Prod) with a custom domain for each environment.
+- Add TEXT2SQL functionality for querying the database, using ChatGPT for database querying.
