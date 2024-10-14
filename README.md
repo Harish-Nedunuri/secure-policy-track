@@ -1,8 +1,16 @@
 # SecurePolicyTrack
 
+## Overview
+
 **Secure Policy Track** is an API for tracking and managing insurance policies securely. It provides endpoints for retrieving insurance policies. The API is built using FastAPI and uses a PostgreSQL database for data storage. It is designed to be secure (OAuth2 JWT-based token access) and scalable (leveraging asynchronous features).
 
-The API is built using the ```policy-core==x.x.x``` **pip package**, which is a Python package that provides a set of tools for working with insurance policies.
+The API is powered by the private ```policy-core==x.x.x``` **pip package**, which is a custom-built Python package specifically created to handle the core logic and operations for managing insurance policies, serving as the backbone for the FastAPI endpoints in this project.
+
+## Web Application URL
+
+The API is hosted at the following URL:
+
+[Secure Policy Track Web API Url](https://secure-policy-track-api.azurewebsites.net/)
 
 ## API Sequence Diagram
 

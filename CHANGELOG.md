@@ -26,4 +26,4 @@
 - [x] create a Dockerfile, CI-CD pipeline with triggers, Unit Test, Build and Deploy the container to a remote registry.
 - [x] Add documentation and doc strings to all functions
 - [x] Perform testing and add documentation
-- [ ] Add user registration, verification and active status and refactor tests
+
