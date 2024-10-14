@@ -80,13 +80,31 @@ To run the Secure Policy Track API, follow these steps to set up and run the API
     SECRET_KEY=your_jwt_secret_key
     ```
 
-5. Run the following command to start the FastAPI server without Docker:
+5. Terraform commands to create infrastructure:  
+
+    ```cd terraform```
+
+    1. Run ```terraform init``` (if not done already).
+    2. Run ```terraform plan``` to ensure everything is set up correctly.
+    3. Run ```terraform apply``` to apply the changes.
+    4. Run ```terraform destroy``` to destroy the infrastructure, if not according to the project requirements.
+
+6. Run Unitests and Integration tests:
+
+    ```bash
+    pytest -vv
+    ```
+
+    - Integration Tests cover the database connectivity.
+    - Unit Tests cover the policy-core python library.
+
+7. Run the following command to start the FastAPI server without Docker:
 
     ```bash
     uvicorn main:app --reload
     ```
 
-6. Run the following command to start the FastAPI server with Docker:
+8. Run the following command to start the FastAPI server with Docker:
 
     ```bash
     docker system prune --force
@@ -94,18 +112,10 @@ To run the Secure Policy Track API, follow these steps to set up and run the API
     docker run -p 8000:8000 <image-name>:tag
     ```
 
-7. Terraform commands to create infrastructure:  
-
-    ```cd terraform```
-
-    1. Run ```terraform init``` (if not done already).
-    2. Run ```terraform plan``` to ensure everything is set up correctly.
-    3. Run ```terraform apply``` to apply the changes.
-
-8. Database Setup documentation
+9. Database Setup documentation
 
 -- **Mock data** is generated using [Mockaroo](https://www.mockaroo.com/)
-
+    -- Database scripts are in the **database_scripts** folder
 -- **Database schema** is generated using [dbdiagram.io](https://dbdiagram.io/home)
 
 ## Project Structure
