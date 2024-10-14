@@ -22,50 +22,61 @@
             background-color: #0056b3;
             border-color: #0056b3;
         }
-        .left-side {
-            float: left;
-            margin-right: 20px; /* Adjust spacing as needed */
+        .left-side img {
+            max-width: 100%;
+            height: auto;
+        }
+        .contact-section {
+            margin-top: 30px;
+        }
+        .btn-linkedin {
+            background-color: #0077b5;
+            color: white;
+            border-color: #0077b5;
+        }
+        .btn-linkedin:hover {
+            background-color: #005983;
+            border-color: #005983;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="col-md-12">
-            <h1 class="text-center mb-4" style="color: blue;">Welcome to API Home</h1>
+            <h1 class="text-center mb-4" style="color: rgb(18, 53, 53);">Welcome to Secure Policy Track API Home</h1>
         </div>
         
         <div class="row">
             <!-- Left column for image -->
             <div class="col-md-4" style="margin-top: 50px;">
-              
-                <img src="/static/RAG.png" alt="RAG" class="img-fluid left-side" >
+                <div class="left-side">
+                    <img src="/static/RAG.png" alt="RAG" class="img-fluid">
+                </div>
             </div>
-            <!-- Right column for text -->
-            <div class="col-md-8">
-                
-                <p style="text-align: left;"><strong>Secure Policy Track</strong></p>
-
-             
+            <!-- Right column for text and buttons -->
+            <div class="col-md-8">               
+                <div style="margin-top: 50px;"></div> <!-- Vertical space -->
+                <!-- Form (if needed) -->
                 <form action="/" method="post" enctype="multipart/form-data">     
                 </form>
                 
-                <!-- Add your image here -->
-                <div class="text-center mt-3" style="margin-top: 10px;">   
-                    <!-- Add the company logo -->
-                    
-                    
-                    <a href="/docs" class="btn btn-info">Go to API Developers Page (Swagger UI)</a>
+                <!-- Action buttons -->
+                <div class="text-center mt-3">
+                    <a href="/docs" class="btn btn-info"> Go  to API Developers Page (Swagger)</a>
                     <div style="margin-top: 20px;"></div> <!-- Vertical space -->
-                    <a href="/redoc" class="btn btn-info">Go to API Documentation (ReDOC UI)</a>
-              
-                   
-                    <div style="margin-top: 10px">
-                   
-                    </div>
+                    <a href="/redoc" class="btn btn-info"> Go to API Documentation (ReDOC UI)</a>
+                </div>
+
+                <!-- LinkedIn contact section -->
+                <div class="contact-section text-center">
+                    <a href="https://www.linkedin.com/in/harish-nedunuri/" class="btn btn-linkedin" target="_blank">
+                        Connect on LinkedIn (Harish Nedunuri)
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

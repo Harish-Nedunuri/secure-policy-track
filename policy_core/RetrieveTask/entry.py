@@ -1,12 +1,11 @@
-import json
 import asyncio
 from policy_core.SupportUtils.audit_utils.logging import logger
 from policy_core.SupportUtils.secret_utils.config import Settings
 from policy_core.SupportUtils.database_utils.pgsql_connection import (connect_to_db,close_db_connection)
-from policy_core.RetreiveTask.args import RetreiverTaskArgs, parse_arguments
-from policy_core.RetreiveTask.src.retreive_data_from_db import get_query_for_search
+from policy_core.RetrieveTask.args import parse_arguments
+from policy_core.RetrieveTask.src.retrieve_data_from_db import get_query_for_search
 
-class RetreiverDataTask:
+class RetrieverDataTask:
     def __init__(self, args):
         self.args = args
         self.settings = Settings()
@@ -51,9 +50,9 @@ class RetreiverDataTask:
 
 async def main():
     args = parse_arguments()   
-    ret_instace =  RetreiverDataTask(args)  
+    ret_instace =  RetrieverDataTask(args)  
     _ = await ret_instace.retrieve_data_by_criteria()
-    logger.info(f"Retreive Task Completed")
+    logger.info(f"Retrieve Data Task Completed")
     
 
 if __name__ == "__main__":    

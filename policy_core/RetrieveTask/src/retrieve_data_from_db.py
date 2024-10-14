@@ -1,4 +1,4 @@
-from policy_core.RetreiveTask.src.models import SearchCriteriaEnum
+from policy_core.RetrieveTask.src.models import SearchCriteriaEnum
 def get_query_for_search(search_criteria: str, row_limit: int):
     """
     Generates an SQL query that searches policies based on dynamic search criteria and limits the number of rows returned.

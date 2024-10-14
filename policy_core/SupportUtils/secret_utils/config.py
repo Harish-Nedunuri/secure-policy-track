@@ -27,7 +27,7 @@ class Settings(BaseSettings):
     POSTGRES_PORT: int = os.getenv('POSTGRES_PORT')
     POSTGRES_INSDB: str = os.getenv("POSTGRES_INSDB")
 
-    # 3. 
+ 
 
 
    

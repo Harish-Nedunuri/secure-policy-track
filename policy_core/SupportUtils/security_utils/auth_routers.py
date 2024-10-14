@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from datetime import  timedelta
 from typing import Optional
 from fastapi.routing import APIRouter
-from typing import Annotated, Any
+from typing import Any
 from policy_core.SupportUtils.secret_utils.config import Settings
 from policy_core.SupportUtils.security_utils.oauth2_security import AuthService
 
@@ -16,11 +16,8 @@ class Token(BaseModel):
     refresh_token_expires_days: Any
     refresh_token: Optional[str] = None
 
-
 auth_ser = AuthService(Settings())
 oauth2Scheme = OAuth2PasswordBearer(tokenUrl="token")
-
-users_db = {"testusername":{"username":"testusername","hashed_password":"$2b$12$Z8U9mcjsjOBSyLY48hZaXO/HTG/ALAy6ceRiNKz7tN.drxtni9WE6"}}
 
 router = APIRouter(
     tags=["Authentication"],
@@ -28,7 +25,7 @@ router = APIRouter(
 )
 @router.post("/token", response_model=Token, description="Provide credentials to acquire access-token")
 async def get_access_token(
-    form_data: Annotated[OAuth2PasswordRequestForm, Depends()]
+    form_data: OAuth2PasswordRequestForm = Depends()
 ):
     username = form_data.username
     password = form_data.password
@@ -87,7 +84,7 @@ router_success = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 @router_success.get("/success-endpoint",description="An secure endpoint for greeting user")
-async def auth_success_endpoint(token: str = Depends(OAuth2PasswordBearer(tokenUrl="token"))):
+async def auth_success_endpoint(token: str = Depends(oauth2Scheme)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",

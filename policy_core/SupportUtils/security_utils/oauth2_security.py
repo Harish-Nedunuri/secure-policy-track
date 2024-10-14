@@ -1,9 +1,8 @@
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordBearer
 from jose import jwt
 from passlib.context import CryptContext
-from pydantic import BaseModel
 from datetime import datetime, timedelta
-from typing import Optional, Any
+from typing import Optional
 from policy_core.SupportUtils.secret_utils.config import Settings
 
 
@@ -18,7 +17,7 @@ class AuthService:
         #TODO: Do not  Hardcode user name and passwords
         self.users_db = {"testusername": {
             "username": "testusername",
-            "hashed_password": "$2b$12$Z8U9mcjsjOBSyLY48hZaXO/HTG/ALAy6ceRiNKz7tN.drxtni9WE6"}}   
+            "hashed_password": "$2b$12$RkrR366bUYjFfstvxkZH8eXBG6fGGDSDCjX3wB63N8Wa6eQm.vU2i"}}   
 
     def verify_password(self, plain_password: str, hashed_password: str) -> bool:
         return self.pwd_context.verify(plain_password, hashed_password)
