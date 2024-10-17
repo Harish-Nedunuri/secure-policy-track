@@ -66,6 +66,15 @@ To run the Secure Policy Track API, follow these steps to set up and run the API
     pip install -e .
     ```
 
+    If your repo is a private repo, you may use below command to install your package. In addition to the command you willned a github PAT token:
+
+    ```bash
+    pip install git+https://github.com/Harish-Nedunuri/secure-policy-track.git
+    ```
+
+    ```bash
+    pip install -e . --extra-index-url <clone_url>
+
 4. Create a `.env` file in the root directory of the project and add the following environment variables:
 
     ```ini
