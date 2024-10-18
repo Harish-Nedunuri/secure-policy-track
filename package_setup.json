@@ -1,0 +1,10 @@
+{
+    "package_name": "policy_core",
+    "package_version": "1.0.3",
+    "package_url":"https://github.com/Harish-Nedunuri/SecurePolicyTrack.git",
+    "package_description": "policy_core is python pip package, that serves the FastAPI.",
+    "tasks": [ 
+        "SupportUtils",
+        "RetrieveTask"  
+    ]
+}

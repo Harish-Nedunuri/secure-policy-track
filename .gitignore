@@ -67,14 +67,15 @@ instance/
 
 # Scrapy stuff:
 .scrapy
-
+# terraform
+.terraform
 # Sphinx documentation
 docs/_build/
 
 # PyBuilder
 .pybuilder/
 target/
-
+temp.py
 # Jupyter Notebook
 .ipynb_checkpoints
 
