@@ -66,6 +66,18 @@ To run the Secure Policy Track API, follow these steps to set up and run the API
     pip install -e .
     ```
 
+    or install using https for development
+
+    ```bash
+    // For public PyPI registry
+    pip install git+https://github.com/Harish-Nedunuri/secure-policy-track.git
+
+    // For private PyPI registry
+
+    pip install git+https://<github-PAT-token>@github.com/Harish-Nedunuri/secure-policy-track.git
+   
+    ```
+
 4. Create a `.env` file in the root directory of the project and add the following environment variables:
 
     ```ini
@@ -94,6 +106,10 @@ To run the Secure Policy Track API, follow these steps to set up and run the API
     ```bash
     pytest -vv
     ```
+
+    ```bash
+     python policy_core/RetrieveTask/entry.py --search_criteria 'email' --search_value '@gmail.com'
+     ```
 
     - Integration Tests cover the database connectivity.
     - Unit Tests cover the policy-core python library.
@@ -128,6 +144,7 @@ This section outlines the core structure of the project:
     └── 📁.github                            #GitHub-specific configuration files
         └── 📁workflows                      -# GitHub Actions workflows
             └── docker-CICD-pipeline.yml     #CI/CD pipeline configuration for Docker
+         └── README.md 
     └── 📁database_scripts                  # SQL scripts and database schema for the project
         └── create_insurance_schema.sql      # SQL script to create insurance schema
         └── insurance_schema.png             # Image of the insurance schema structure
@@ -138,6 +155,7 @@ This section outlines the core structure of the project:
         └── README.md                        # Documentation for database scripts
     └── 📁documentation                      # Project documentation files
         └── SecurePolicyTracker.drawio       # Diagram of the project system architecture (draw.io format)
+        └── README.md   
     └── 📁policy_core                        # Core module of the project
         └── 📁RetrieveTask                   # Module for retrieving data related to policies
             └── 📁src                        # Source code for retrieving tasks
@@ -148,6 +166,7 @@ This section outlines the core structure of the project:
             └── args.py                      # Argument parsing for RetrieveTask
             └── entry.py                     # Entry point for RetrieveTask module
             └── router.py                    # FastAPI routes for RetrieveTask
+            └── README.md 
         └── 📁SupportUtils                   # Utility functions used across the project
             └── 📁audit_utils                # Utilities for auditing and logging
                 └── __init__.py              # Package initialization file

@@ -1,6 +1,15 @@
 
 import pytest
 from policy_core.RetrieveTask.src.retrieve_data_from_db import get_query_for_search  
+import pytest
+import asyncio
+from decimal import Decimal
+from datetime import date
+from policy_core.RetrieveTask.src.retrieve_data_from_db import get_query_for_search
+from policy_core.RetrieveTask.args import RetrieverTaskArgs
+from policy_core.RetrieveTask.entry import RetrieverDataTask
+from policy_core.SupportUtils.database_utils.pgsql_connection import connect_to_db, close_db_connection
+from policy_core.SupportUtils.audit_utils.logging import logger
 
 def normalize_query(query):
     """
@@ -51,3 +60,60 @@ def test_get_query_for_search_check_row_limit():
     
     # Then: the query should contain the exact row limit in the LIMIT clause
     assert f"LIMIT {row_limit}" in normalized_query
+
+
+@pytest.mark.asyncio
+async def test_retrieve_data_by_criteria(mocker):
+    # Given: Setup the arguments and mock the necessary external functions
+    args = RetrieverTaskArgs(
+        search_criteria="email",
+        search_value="@gmail.com",
+        row_limit=2
+    )
+
+    # Mock the database connection
+    mock_connection = mocker.Mock()
+    mocker.patch('policy_core.SupportUtils.database_utils.pgsql_connection.connect_to_db', return_value=mock_connection)
+    mocker.patch('policy_core.SupportUtils.database_utils.pgsql_connection.close_db_connection')
+
+    # Mock the fetch results from the connection using the provided mock data
+    mock_record_1 = {
+        'policy_number': 'POL-25761-2573', 'premium_amount': 4638.73, 'coverage_amount': 55111.14, 'status': 'cancelled',
+        'start_date': '2022-04-20', 'end_date': '2025-07-28', 'full_name': 'William Richardson',
+        'address': '741 Taylor Shoal Suite 151, Port Amymouth, PA 00974', 'email': 'elizabeth67@gmail.com',
+        'phone_number': '(880)340-1251', 'type_name': 'Health', 'description': 'Covers medical expenses for illnesses, injuries, and preventive care.'
+    }
+
+    mock_record_2 = {
+        'policy_number': 'POL-37208-6868', 'premium_amount': 3705.25, 'coverage_amount': 69442.15, 'status': 'expired',
+        'start_date': '2020-02-24', 'end_date': '2025-04-26', 'full_name': 'Scott Fleming',
+        'address': '97659 Peters Light, New Nicole, CO 44392', 'email': 'janice56@gmail.com', 'phone_number': '5332989928',
+        'type_name': 'Business', 'description': 'Protects businesses from financial losses due to unforeseen events.'
+    }
+    
+    mock_connection.fetch.return_value = [mock_record_1, mock_record_2]
+
+    # Mock the get_query_for_search function
+    mocker.patch('policy_core.RetrieveTask.src.retrieve_data_from_db.get_query_for_search', return_value="SELECT * FROM policies WHERE email LIKE $1 LIMIT $2")
+
+    # When: Instantiate the RetrieverDataTask and call the function
+    retriever_task = RetrieverDataTask(args)
+    result = await retriever_task.retrieve_data_by_criteria()
+
+    # Then: Validate the result
+    expected_result = [
+        {
+            'policy_number': 'POL-25761-2573', 'premium_amount': 4638.73, 'coverage_amount': 55111.14, 'status': 'cancelled',
+            'start_date': '2022-04-20', 'end_date': '2025-07-28', 'full_name': 'William Richardson',
+            'address': '741 Taylor Shoal Suite 151, Port Amymouth, PA 00974', 'email': 'elizabeth67@gmail.com',
+            'phone_number': '(880)340-1251', 'type_name': 'Health', 'description': 'Covers medical expenses for illnesses, injuries, and preventive care.'
+        },
+        {
+            'policy_number': 'POL-37208-6868', 'premium_amount': 3705.25, 'coverage_amount': 69442.15, 'status': 'expired',
+            'start_date': '2020-02-24', 'end_date': '2025-04-26', 'full_name': 'Scott Fleming',
+            'address': '97659 Peters Light, New Nicole, CO 44392', 'email': 'janice56@gmail.com', 'phone_number': '5332989928',
+            'type_name': 'Business', 'description': 'Protects businesses from financial losses due to unforeseen events.'
+        }
+    ]
+
+    assert result == expected_result
