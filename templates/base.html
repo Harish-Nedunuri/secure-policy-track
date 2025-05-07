@@ -1,70 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- The DOCTYPE declaration defines the document type and version of HTML -->
+<!-- This HTML tag starts the main HTML document with the language set to English -->
 <head>
+    <!-- The head tag contains metadata and references to external files such as stylesheets and scripts -->
     <meta charset="UTF-8">
+    <!-- This meta tag sets the character encoding to UTF-8, ensuring support for all character sets -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- This meta tag makes the page responsive, meaning it will adjust for different screen sizes -->
     <title>Home</title>
+    <!-- The title tag defines the title of the web page displayed in the browser's title bar -->
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- This link includes the Bootstrap CSS file, a popular CSS framework for responsive designs -->
+
     <!-- Custom CSS for colors -->
     <style>
         body {
             background-color: #f8f9fa;
         }
+        /* The body background color is set to a light grey color */
+
         .container {
             margin-top: 50px;
         }
+        /* Adds a margin (space) at the top of the container to move it 50px down */
+
         .btn-primary {
             background-color: #007bff;
             border-color: #007bff;
         }
+        /* Styles the primary button with a specific blue color and border */
+
         .btn-primary:hover {
             background-color: #0056b3;
             border-color: #0056b3;
         }
+        /* Changes the button color when hovered to a darker blue */
+
         .left-side img {
             max-width: 100%;
             height: auto;
         }
+        /* Ensures the image in the left side column resizes responsively */
+
         .contact-section {
             margin-top: 30px;
         }
+        /* Adds space at the top of the contact section */
+
         .btn-linkedin {
             background-color: #0077b5;
             color: white;
             border-color: #0077b5;
         }
+        /* Styles the LinkedIn button with LinkedIn blue and white text */
+
         .btn-linkedin:hover {
             background-color: #005983;
             border-color: #005983;
         }
+        /* Changes LinkedIn button's color on hover */
     </style>
+    <!-- Internal CSS styling to customize the appearance of the page -->
 </head>
+
 <body>
+    <!-- The body tag contains the visible content of the webpage -->
     <div class="container">
+        <!-- Bootstrap container class to center the content and provide responsive layout -->
         <div class="col-md-12">
             <h1 class="text-center mb-4" style="color: rgb(18, 53, 53);">Welcome to Secure Policy Track API Home</h1>
+            <!-- Heading centered with a margin-bottom and custom color styling -->
         </div>
         
         <div class="row">
+            <!-- Bootstrap row to organize content into columns -->
+
             <!-- Left column for image -->
             <div class="col-md-4" style="margin-top: 50px;">
                 <div class="left-side">
                     <img src="/static/RAG.png" alt="RAG" class="img-fluid">
+                    <!-- Displays an image from the server. The class 'img-fluid' makes the image responsive -->
                 </div>
             </div>
+
             <!-- Right column for text and buttons -->
             <div class="col-md-8">               
-                <div style="margin-top: 50px;"></div> <!-- Vertical space -->
+                <div style="margin-top: 50px;"></div>
+                <!-- Adds vertical space -->
+
                 <!-- Form (if needed) -->
                 <form action="/" method="post" enctype="multipart/form-data">     
                 </form>
-                
+                <!-- Empty form setup with POST method, if form fields are needed later -->
+
                 <!-- Action buttons -->
                 <div class="text-center mt-3">
                     <a href="/docs" class="btn btn-info"> Go  to API Developers Page (Swagger)</a>
-                    <div style="margin-top: 20px;"></div> <!-- Vertical space -->
+                    <!-- Button styled as Bootstrap 'info' to link to API docs -->
+                    <div style="margin-top: 20px;"></div>
+                    <!-- Adds vertical space -->
                     <a href="/redoc" class="btn btn-info"> Go to API Documentation (ReDOC UI)</a>
+                    <!-- Button linking to another API documentation interface -->
                 </div>
 
                 <!-- LinkedIn contact section -->
@@ -72,6 +111,7 @@
                     <a href="https://www.linkedin.com/in/harish-nedunuri/" class="btn btn-linkedin" target="_blank">
                         Connect on LinkedIn (Harish Nedunuri)
                     </a>
+                    <!-- LinkedIn button styled with a custom class linking to a LinkedIn profile -->
                 </div>
             </div>
         </div>
@@ -81,5 +121,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Includes jQuery, Popper.js, and Bootstrap's JavaScript for interactive elements -->
 </body>
 </html>
