@@ -1,12 +1,12 @@
 {
   "myresolver": {
     "Account": {
-      "Email": "harish.nedunuri@hybirdtech.com",
+      "Email": "harish@bizmoni.com",
       "Registration": {
         "body": {
           "status": "valid",
           "contact": [
-            "mailto:harish.nedunuri@hybirdtech.com"
+            "mailto:harish@bizmoni.com"
           ]
         },
         "uri": "https://acme-v02.api.letsencrypt.org/acme/acct/2206390335"

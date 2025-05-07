@@ -128,13 +128,13 @@ services:
     labels:
       traefik.enable: "true"
       # Router for the MAIN domain on HTTPS (websecure)
-      traefik.http.routers.n8n.rule: "Host(`hybirdn8n.uksouth.cloudapp.azure.com`)"
+      traefik.http.routers.n8n.rule: "Host(`bizmonin8n.uksouth.cloudapp.azure.com`)"
       traefik.http.routers.n8n.entrypoints: "websecure"
       # Updated certificate resolver to match Traefik's configuration
       traefik.http.routers.n8n.tls.certresolver: "mytlschallenge"
 
       # Optional: HTTP → HTTPS redirect
-      traefik.http.routers.n8n-web.rule: "Host(`hybirdn8n.uksouth.cloudapp.azure.com`)"
+      traefik.http.routers.n8n-web.rule: "Host(`bizmonin8n.uksouth.cloudapp.azure.com`)"
       traefik.http.routers.n8n-web.entrypoints: "web"
       traefik.http.middlewares.n8n-redirect.redirectscheme.scheme: "https"
       traefik.http.routers.n8n-web.middlewares: "n8n-redirect"
